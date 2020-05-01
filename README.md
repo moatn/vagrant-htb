@@ -14,6 +14,13 @@ __MacOS/Windows/Unix__
 https://www.vagrantup.com/downloads.html
 ```
 
+## Start Kali box
+
+```
+cd vagrant-htb
+vagrant up
+```
+
 ## Socks Proxy set-up
 
 ```

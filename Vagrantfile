@@ -12,7 +12,7 @@ Vagrant.configure("2") do |config|
     end
 
     config.vm.define :ctf01, primary: true do |machine|
-        machine.vm.host_name = "shellz.local"
+        machine.vm.host_name = "ctf01.local"
         machine.vm.network "private_network", ip: "10.13.37.10"
 	machine.vm.provider "virtualbox" do |vb|
  	    vb.cpus = 1

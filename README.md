@@ -35,7 +35,7 @@ On native OS, set Socks Proxy wihtin Burp Suite
 ## Enter vagrant machine
 
 ```
-vagrant kali01 default
+vagrant ssh kali01 
 ```
 
 Happy hacking

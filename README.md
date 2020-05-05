@@ -17,20 +17,25 @@ https://www.vagrantup.com/downloads.html
 ## Start Kali box
 
 ```
+git clone git@github.com:moatn/vagrant-htb.git
 cd vagrant-htb
 vagrant up
 ```
 
 ## Socks Proxy set-up
 
-```
-ssh vagrant@10.13.37.10 -D 1234
-```
+The vagrant machine automatically sets up a Socks Proxy. This way, you can use your Burp Suite on your Native OS ;-) 
 
-On native OS, set Socks Proxy on Burp Suite
+On native OS, set Socks Proxy wihtin Burp Suite
 ```
 10.13.37.10
-1234
+1080
+```
+
+## Enter vagrant machine
+
+```
+vagrant kali01 default
 ```
 
 Happy hacking

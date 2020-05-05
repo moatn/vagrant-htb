@@ -28,7 +28,7 @@ The vagrant machine automatically sets up a Socks Proxy. This way, you can use y
 
 On native OS, set Socks Proxy wihtin Burp Suite
 ```
-10.13.37.10
+127.0.0.1
 1080
 ```
 

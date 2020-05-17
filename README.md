@@ -1,4 +1,26 @@
-# vagrant-htb
+# Vagrant-htb
+
+## Kali vagrant setup (minimal)
+
+__Tools installed__
+
+  - vim
+  - net-tools
+  - python3
+  - unzip
+  - tmux
+  - nmap
+  - webshells
+  - docker-ce
+
+If you want to add more, just edit the provision/kali.yml file. 
+
+__Fancy Git repo's added__
+
+  - Impacket
+  - Nishang
+
+Againg, if you want to add more just append the git repo blocks within the provision/kali.yml
 
 ## Install VirtualBox
 

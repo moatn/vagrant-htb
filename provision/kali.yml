@@ -1,0 +1,82 @@
+---
+- hosts: kali01
+  become: yes
+  become_method: sudo
+  gather_facts: True
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
+  tasks:
+
+    - name: install base packages
+      apt:
+        name:
+          - apt-transport-https
+          - ca-certificates
+          - curl
+          - gnupg-agent
+          - software-properties-common
+          - vim
+          - net-tools
+          - python3
+          - unzip
+          - tmux
+          - nmap
+          - webshells
+        state: present
+
+    - name: ensure old versions of Docker are not installed
+      package:
+        name:
+          - docker
+          - docker-engine
+        state: absent
+      become: true
+
+    - name: add docker apt key
+      apt_key:
+        url: https://download.docker.com/linux/debian/gpg
+        id: 9DC858229FC7DD38854AE2D88D81803C0EBFCD88
+        state: present
+
+    - name: add docker repo
+      apt_repository:
+        repo: 'deb [arch=amd64] https://download.docker.com/linux/debian buster stable'
+        state: present
+        filename: docker
+        update_cache: yes
+
+    # - name: update apt cache
+    #   apt:
+    #     update_cache: yes
+
+    - name: install docker-ce
+      apt:
+        name: 
+            - docker-ce
+            - docker-ce-cli
+            - containerd.io
+        state: present
+
+    - name: add vagrant user to docker group
+      user:
+        name: vagrant
+        group: docker
+
+    - name: tooling dir
+      file:
+        path: /home/vagrant/tools/
+        owner: vagrant
+        group: vagrant
+        state: directory
+
+    - name: Impacket repo
+      git:
+        repo: https://github.com/SecureAuthCorp/impacket.git
+        dest: /home/vagrant/tools/impacket
+        version: master
+
+    - name: Nishang repo
+      git:
+        repo: https://github.com/samratashok/nishang.git
+        dest: /home/vagrant/tools/nishang
+        version: master

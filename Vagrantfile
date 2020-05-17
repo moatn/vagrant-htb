@@ -26,6 +26,12 @@ Vagrant.configure("2") do |config|
         # extra kali provisioning/synced folders
 	    machine.vm.synced_folder "data/", "/home/vagrant/Documents"
 
+        machine.vm.provision "ansible_local", preserve_order: true do |ansible|
+            ansible.playbook = "provision/kali.yml"
+            ansible.install_mode = :pip
+            ansible.pip_install_cmd = "sudo apt install python3 python3-pip -y; sudo ln -s /usr/bin/pip3 /usr/bin/pip"
+            ansible.compatibility_mode = '2.0'
+        end
     end
 
     # room for extra machine config here 

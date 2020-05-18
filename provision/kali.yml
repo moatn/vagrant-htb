@@ -22,6 +22,7 @@
           - tmux
           - nmap
           - webshells
+          - ipython3 
         state: present
 
     - name: ensure old versions of Docker are not installed
@@ -69,14 +70,34 @@
         group: vagrant
         state: directory
 
-    - name: Impacket repo
+    - name: Install tooling 
       git:
-        repo: https://github.com/SecureAuthCorp/impacket.git
-        dest: /home/vagrant/tools/impacket
+        repo: "{{ item.value }}"         
+        dest: "/home/vagrant/tools/{{ item.key }}"
         version: master
+      with_dict:  
+        - { impacket: "https://github.com/SecureAuthCorp/impacket.git" } 
+        - { nishang: "https://github.com/samratashok/nishang.git" }  
+        - { LinEnum: "https://github.com/rebootuser/LinEnum.git" } 
+        - { PrivescCheck: "https://github.com/itm4n/PrivescCheck.git" }  
+        - { evil-winrm: "https://github.com/Hackplayers/evil-winrm.git" }  
+        - { dirsearch: "https://github.com/maurosoria/dirsearch.git" } 
+        - { peas: "https://github.com/carlospolop/privilege-escalation-awesome-scripts-suite.git" }
+        - { seclists: "https://github.com/danielmiessler/SecLists.git" } 
 
-    - name: Nishang repo
-      git:
-        repo: https://github.com/samratashok/nishang.git
-        dest: /home/vagrant/tools/nishang
-        version: master
+
+    - name: mkdir for pspy64
+      file:
+        path: /home/tools/pspy
+        owner: vagrant
+        group: vagrant
+        state: directory       
+
+    - name: Install pspy64
+      get_url: 
+        url: https://github.com/DominicBreuker/pspy/releases/download/v1.2.0/pspy64
+        dest: /home/vagrant/tools/pspy64
+        
+
+
+

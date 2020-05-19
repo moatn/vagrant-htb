@@ -84,6 +84,19 @@
         - { dirsearch: "https://github.com/maurosoria/dirsearch.git" } 
         - { peas: "https://github.com/carlospolop/privilege-escalation-awesome-scripts-suite.git" }
         - { seclists: "https://github.com/danielmiessler/SecLists.git" } 
+        - { oh-my-tmux: "https://github.com/gpakosz/.tmux.git" } 
+
+
+    - name: Remove original tmux 
+      file:
+        path: /home/vagrant/.tmux.conf
+        state: absent 
+
+    - name: symlink oh-my-tmux config
+      file:
+        src: /home/vagrant/tools/oh-my-tmux/.tmux.conf
+        dest: /home/vagrant/.tmux.conf
+        state: link
 
 
     - name: mkdir for pspy64

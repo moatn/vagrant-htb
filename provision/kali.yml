@@ -86,6 +86,12 @@
         - { seclists: "https://github.com/danielmiessler/SecLists.git" } 
         - { oh-my-tmux: "https://github.com/gpakosz/.tmux.git" } 
 
+    - name: Create Kali colored bash shell
+      get_url:
+        url: https://gist.githubusercontent.com/moatn/f63e2577444bd03be10a392ed25920ae/raw/e2fbfd367f75da40857870cd4fd849be18ba8a13/bash.sh
+        dest: /root/.bashrc
+        mode: '0644' 
+
 
     - name: Remove original tmux 
       file:

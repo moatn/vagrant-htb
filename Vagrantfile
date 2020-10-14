@@ -11,8 +11,11 @@ Vagrant.configure("2") do |config|
     config.vm.box_version = "0.2"
     config.vm.provider "virtualbox" do |vb|
         vb.memory = 2048
-	    vb.cpus = 2
-	    vb.gui = false
+	vb.cpus = 2
+	vb.gui = false
+	vb.customize ['modifyvm', :id, '--audio', 'none']
+	vb.customize ["modifyvm", :id, "--usb", "off"]
+	vb.customize ["modifyvm", :id, "--usbehci", "off"]
     end
 
     # kali machine setttings
@@ -29,7 +32,7 @@ Vagrant.configure("2") do |config|
         machine.vm.provision "ansible_local", preserve_order: true do |ansible|
             ansible.playbook = "provision/kali.yml"
             ansible.install_mode = :pip
-            ansible.pip_install_cmd = "sudo apt install python3 python3-pip -y; sudo ln -s /usr/bin/pip3 /usr/bin/pip"
+            ansible.pip_install_cmd = "sudo apt install python3 python3-pip -y"
             ansible.compatibility_mode = '2.0'
         end
     end

@@ -7,8 +7,7 @@ Vagrant.configure("2") do |config|
     config.ssh.extra_args = ["-D", "1080"]
 
     # base box settings
-    config.vm.box = "moatn/kali-minimal"
-    config.vm.box_version = "0.2"
+    config.vm.box = "kalilinux/rolling"
     config.vm.provider "virtualbox" do |vb|
         vb.memory = 2048
 	vb.cpus = 2
@@ -31,7 +30,7 @@ Vagrant.configure("2") do |config|
 
         machine.vm.provision "ansible_local", preserve_order: true do |ansible|
             ansible.playbook = "provision/kali.yml"
-            ansible.install_mode = :pip
+            ansible.install_mode = :pip3
             ansible.pip_install_cmd = "sudo apt install python3 python3-pip -y"
             ansible.compatibility_mode = '2.0'
         end
